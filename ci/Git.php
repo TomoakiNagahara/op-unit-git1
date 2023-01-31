@@ -21,10 +21,10 @@ namespace OP;
 //	...
 $ci = new CI();
 
-//	Test
-$result =  null;
-$args   = ['a','b'];
-$ci->Set('Test', $result, $args);
+//	Root
+$args   = null;
+$result = RootPath('app');
+$ci->Set('Root', $result, $args);
 
 //	...
 return $ci->GenerateConfig();

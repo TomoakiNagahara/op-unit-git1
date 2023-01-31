@@ -24,6 +24,7 @@ namespace OP\UNIT;
 use OP\IF_UNIT;
 use OP\OP_CORE;
 use OP\OP_CI;
+use function OP\RootPath;
 
 /** Git
  *
@@ -35,5 +36,18 @@ use OP\OP_CI;
  */
 class Git implements IF_UNIT
 {
+	/** use
+	 *
+	 */
 	use OP_CORE, OP_CI;
+
+	/** Get git root path.
+	 *
+	 * @created    2023-01-30
+	 * @return     string
+	 */
+	static function Root() : string
+	{
+		return RootPath('app');
+	}
 }
