@@ -26,5 +26,10 @@ $args   = null;
 $result = RootPath('app');
 $ci->Set('Root', $result, $args);
 
+//	SubmoduleConfig
+$args   = true;
+$result = OP::Unit('Git')->SubmoduleConfig(true);
+$ci->Set('SubmoduleConfig', $result, $args);
+
 //	...
 return $ci->GenerateConfig();

@@ -1,0 +1,2 @@
+Show `Git::SubmoduleConfig()` result
+===
