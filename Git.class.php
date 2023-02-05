@@ -142,4 +142,20 @@ class Git implements IF_UNIT
 		//	...
 		echo trim(`git switch {$branch_name} 2>&1`);
 	}
+
+	/** Push of branch
+	 *
+	 * @created    2023-02-05
+	 * @param      string      $branch_name
+	 */
+	static function Push(string $branch_name)
+	{
+		//	For CI
+		if( OP()->AppID() === 'self-check' ){
+			return;
+		}
+
+		//	...
+		echo `git push origin {$branch_name}`;
+	}
 }

@@ -41,5 +41,10 @@ $args   = '2022';
 $result =  null;
 $ci->Set('Switch', $result, $args);
 
+//	Push
+$args   = '2022';
+$result =  null;
+$ci->Set('Push', $result, $args);
+
 //	...
 return $ci->GenerateConfig();
