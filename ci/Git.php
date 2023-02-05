@@ -26,5 +26,10 @@ $args   = true;
 $result = OP::Unit('Git')->SubmoduleConfig(true);
 $ci->Set('SubmoduleConfig', $result, $args);
 
+//	CommitID
+$args   = 'master';
+$result = trim(`git rev-parse master`);
+$ci->Set('CommitID', $result, $args);
+
 //	...
 return $ci->GenerateConfig();

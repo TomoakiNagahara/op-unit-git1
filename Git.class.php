@@ -85,4 +85,23 @@ class Git implements IF_UNIT
 		//	...
 		return $configs;
 	}
+
+	/** Return Commit ID by branch name.
+	 *
+	 * @see https://prograshi.com/general/git/show-ref-and-rev-parse/
+	 * @created    2023-02-05
+	 * @param      string      $branch_name
+	 * @return     string
+	 */
+	static function CommitID(string $branch_name) : string
+	{
+		//	...
+		$branches = self::Branches();
+		//	...
+		if(!array_search($branch_name, $branches) ){
+			throw new Exception("This branch name is not exists. ($branch_name)");
+		}
+		//	...
+		return trim(`git rev-parse {$branch_name}`);
+	}
 }
