@@ -86,6 +86,28 @@ class Git implements IF_UNIT
 		return $configs;
 	}
 
+	/** Get branch name list
+	 *
+	 * @created    2023-02-05
+	 * @return     array       $branches
+	 */
+	static function Branches():array
+	{
+		//	...
+		$return = [];
+		//	...
+		foreach( explode("\n", `git branch`) as $branch ){
+			//	...
+			if(empty($branch)){
+				continue;
+			}
+			//	...
+			$return[] = substr($branch, 2);
+		}
+		//	...
+		return $return;
+	}
+
 	/** Return Commit ID by branch name.
 	 *
 	 * @see https://prograshi.com/general/git/show-ref-and-rev-parse/

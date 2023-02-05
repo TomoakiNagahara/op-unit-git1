@@ -31,5 +31,10 @@ $args   = 'master';
 $result = trim(`git rev-parse master`);
 $ci->Set('CommitID', $result, $args);
 
+//	Branches
+$args   =  null;
+$result = ['2022','master'];
+$ci->Set('Branches', $result, $args);
+
 //	...
 return $ci->GenerateConfig();
