@@ -25,7 +25,6 @@ use Exception;
 use OP\IF_UNIT;
 use OP\OP_CORE;
 use OP\OP_CI;
-use function OP\RootPath;
 
 /** Git
  *
@@ -42,16 +41,6 @@ class Git implements IF_UNIT
 	 */
 	use OP_CORE, OP_CI;
 
-	/** Get git root path.
-	 *
-	 * @created    2023-01-30
-	 * @return     string
-	 */
-	static function Root() : string
-	{
-		return RootPath('app');
-	}
-
 	/** Get submodule config.
 	 *
 	 * @created    2023-01-02
@@ -64,7 +53,7 @@ class Git implements IF_UNIT
 	{
 		//	...
 		$file_name = $current ? '.gitmodules': '.gitmodules_original';
-		$file_path = self::Root() . $file_name;
+		$file_path = OP()->MetaRoot('git') . $file_name;
 
 		//	Get submodule settings.
 		if(!file_exists($file_path) ){

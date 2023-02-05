@@ -21,11 +21,6 @@ namespace OP;
 //	...
 $ci = new CI();
 
-//	Root
-$args   = null;
-$result = RootPath('app');
-$ci->Set('Root', $result, $args);
-
 //	SubmoduleConfig
 $args   = true;
 $result = OP::Unit('Git')->SubmoduleConfig(true);
