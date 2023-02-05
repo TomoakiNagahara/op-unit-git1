@@ -36,5 +36,10 @@ $args   =  null;
 $result = ['2022','master'];
 $ci->Set('Branches', $result, $args);
 
+//	Switch
+$args   = '2022';
+$result =  null;
+$ci->Set('Switch', $result, $args);
+
 //	...
 return $ci->GenerateConfig();

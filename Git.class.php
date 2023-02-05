@@ -126,4 +126,14 @@ class Git implements IF_UNIT
 		//	...
 		return trim(`git rev-parse {$branch_name}`);
 	}
+
+	/** Switch to branch
+	 *
+	 * @created    2023-02-05
+	 * @param      string      $branch_name
+	 */
+	static function Switch(string $branch_name)
+	{
+
+	}
 }
