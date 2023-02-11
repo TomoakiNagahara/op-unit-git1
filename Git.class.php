@@ -156,6 +156,6 @@ class Git implements IF_UNIT
 		}
 
 		//	...
-		echo `git push origin {$branch_name}`;
+		echo `git push origin {$branch_name} 2>&1`;
 	}
 }
