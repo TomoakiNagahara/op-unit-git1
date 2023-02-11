@@ -162,4 +162,14 @@ class Git implements IF_UNIT
 	{
 		return trim(`git rev-parse --abbrev-ref HEAD 2>&1`);
 	}
+
+	/** Get current commit ID.
+	 *
+	 * @created    2023-01-06
+	 * @return     string
+	 */
+	static function CurrentCommitID():string
+	{
+		return trim(`git show --format='%H' --no-patch 2>&1`);
+	}
 }
