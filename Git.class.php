@@ -134,6 +134,12 @@ class Git implements IF_UNIT
 	 */
 	static function Switch(string $branch_name):void
 	{
+		//	...
+		if( self::CurrentBranch() === $branch_name ){
+			return;
+		}
+
+		//	...
 		echo trim(`git switch {$branch_name} 2>&1`);
 	}
 }
