@@ -152,4 +152,14 @@ class Git implements IF_UNIT
 	{
 		echo trim(`git push origin {$branch_name} 2>&1`);
 	}
+
+	/** Get current branch name.
+	 *
+	 * @created    2023-01-06
+	 * @return     string
+	 */
+	static function CurrentBranch():string
+	{
+		return trim(`git rev-parse --abbrev-ref HEAD 2>&1`);
+	}
 }
