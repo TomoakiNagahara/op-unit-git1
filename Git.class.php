@@ -25,6 +25,7 @@ use Exception;
 use OP\IF_UNIT;
 use OP\OP_CORE;
 use OP\OP_CI;
+use OP\UNIT\Git\GitRemote;
 
 /** Git
  *
@@ -170,5 +171,20 @@ class Git implements IF_UNIT
 	static function CurrentCommitID():string
 	{
 		return trim(`git show --format='%H' --no-patch 2>&1`);
+	}
+
+	static function Remote()
+	{
+		//	...
+		require_once(__DIR__.'/GitRemote.class.php');
+
+		//	...
+		static $_remote;
+		if(!$_remote ){
+			$_remote = new GitRemote();
+		}
+
+		//	...
+		return $_remote;
 	}
 }
