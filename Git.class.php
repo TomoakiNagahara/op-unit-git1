@@ -49,11 +49,10 @@ class Git implements IF_UNIT
 	 * @throws     Exception
 	 * @return     array
 	 */
-	static function SubmoduleConfig(?bool $current=true) : array
+	static function SubmoduleConfig(?string $file_name) : array
 	{
 		//	...
-		$file_name = $current ? '.gitmodules': '.gitmodules_original';
-		$file_path = OP()->MetaRoot('git') . $file_name;
+		$file_path = OP()->MetaRoot('git') . ($file_name ?? '.gitmodules');
 
 		//	Get submodule settings.
 		if(!file_exists($file_path) ){
