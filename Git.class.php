@@ -25,7 +25,6 @@ use Exception;
 use OP\IF_UNIT;
 use OP\OP_CORE;
 use OP\OP_CI;
-use OP\UNIT\Git\GitRemote;
 
 /** Git
  *
@@ -53,37 +52,13 @@ class Git implements IF_UNIT
 	static function SubmoduleConfig(?string $file_name) : array
 	{
 		//	...
-		$file_path = OP()->MetaRoot('git') . ($file_name ?? '.gitmodules');
-
-		//	Get submodule settings.
-		if(!file_exists($file_path) ){
-			throw new Exception("This file does not exist. ($file_path)");
-		}
-
-		//	Get submodule settings from file.
-		if(!$file = file_get_contents($file_path) ){
-			throw new Exception("Could not read this file. ($file_path)");
-		}
-
-		//	Parse submodule settings.
-		$source = explode("\n", $file);
-
-		//	Parse the submodule settings.
-		$configs = [];
-		while( $line = array_shift($source) ){
-			//	[submodule "asset/core"]
-			$name = substr($line, 12, -2);
-			$name = str_replace('/', '-', $name);
-
-			//	path, url, branch
-			for($i=0; $i<3; $i++){
-				list($key, $var) = explode("=", array_shift($source));
-				$configs[$name][ trim($key) ] = trim($var);
-			}
-		}
+		require_once(__DIR__.'/function/SubmoduleConfig.php');
 
 		//	...
-		return $configs;
+		$file_path = OP()->MetaRoot('git') . ($file_name ?? '.gitmodules');
+
+		//	...
+		return GIT\SubmoduleConfig($file_path);
 	}
 
 	/** Get branch name list
@@ -181,7 +156,7 @@ class Git implements IF_UNIT
 		//	...
 		static $_remote;
 		if(!$_remote ){
-			$_remote = new GitRemote();
+			$_remote = new GIT\GitRemote();
 		}
 
 		//	...
