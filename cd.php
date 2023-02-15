@@ -25,3 +25,4 @@ $argv3 = $_SERVER['argv'][3] ?? '';
 $argv4 = $_SERVER['argv'][4] ?? '';
 $argv5 = $_SERVER['argv'][5] ?? '';
 echo `php ../../../cd.php {$argv1} {$argv2} {$argv3} {$argv4} {$argv5}`;
+echo "\n";
