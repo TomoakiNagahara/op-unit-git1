@@ -61,6 +61,30 @@ class Git implements IF_UNIT
 		return GIT\SubmoduleConfig($file_path);
 	}
 
+	/** Working tree is clean?
+	 *
+	 * @return bool
+	 */
+	static function Status():bool
+	{
+		//	...
+		$result = `git status 2>&1`;
+
+		//	...
+		return strpos($result, 'nothing to commit, working tree clean') ? true: false;
+	}
+
+	/** Fetch repository.
+	 *
+	 * @created    2023-02-13
+	 * @param      string      $remote
+	 * @return     string
+	 */
+	static function Fetch(string $remote=''):?string
+	{
+		return `git fetch {$remote}`;
+	}
+
 	/** Get branch name list
 	 *
 	 * @created    2023-02-05
@@ -106,16 +130,52 @@ class Git implements IF_UNIT
 	 *
 	 * @created    2023-02-05
 	 * @param      string      $branch_name
+	 * @return     boolean
 	 */
-	static function Switch(string $branch_name):void
+	static function Switch(string $branch_name):bool
 	{
 		//	...
 		if( self::CurrentBranch() === $branch_name ){
-			return;
+			return true;
 		}
 
 		//	...
-		echo trim(`git switch {$branch_name} 2>&1`);
+		$result = `git switch {$branch_name} 2>&1`;
+
+		//	...
+		if( 0 !== strpos($result, "Switched to branch '{$branch_name}'") ){
+			D('Git switch was failed.');
+			echo($result);
+			return false;
+		}
+
+		//	...
+		return true;
+	}
+
+	/** Rebase
+	 *
+	 * @created    2023-02-05
+	 */
+	static function Rebase($remote_name, $branch_name)
+	{
+		//	...
+		if(!self::Switch($branch_name) ){
+			return false;
+		}
+
+		//	...
+		$commit_id  = self::CommitID($branch_name);
+		$current_id = self::CurrentCommitID();
+
+		//	...
+		if( $commit_id === $current_id ){
+			return true;
+		}
+
+		//	...
+		$result = `git rebase {$remote_name}/{$branch_name} 2>&1`;
+		echo $result;
 	}
 
 	/** Push of branch
@@ -148,7 +208,12 @@ class Git implements IF_UNIT
 		return trim(`git show --format='%H' --no-patch 2>&1`);
 	}
 
-	static function Remote()
+	/** Return GitRemote instance.
+	 *
+	 * @created    2023-02-13
+	 * @return    \OP\UNIT\GIT\GitRemote
+	 */
+	static function Remote():\OP\UNIT\GIT\GitRemote
 	{
 		//	...
 		require_once(__DIR__.'/GitRemote.class.php');
