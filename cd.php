@@ -2,7 +2,7 @@
 /** op-core:/cd.php
  *
  * @created    2023-02-10
- * @version    1.0
+ * @version    2.1
  * @package    op-core
  * @author     Tomoaki Nagahara <tomoaki.nagahara@gmail.com>
  * @copyright  Tomoaki Nagahara All right reserved.
@@ -25,4 +25,3 @@ $argv3 = $_SERVER['argv'][3] ?? '';
 $argv4 = $_SERVER['argv'][4] ?? '';
 $argv5 = $_SERVER['argv'][5] ?? '';
 echo `php ../../../cd.php {$argv1} {$argv2} {$argv3} {$argv4} {$argv5}`;
-echo "\n";
