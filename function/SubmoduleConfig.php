@@ -31,7 +31,7 @@ use Exception;
  * @throws     Exception
  * @return     array
  */
-function SubmoduleConfig(string $file_path) : array
+function SubmoduleConfig(string $file_path='.gitmodules') : array
 {
 	//	Get submodule settings.
 	if(!file_exists($file_path) ){
