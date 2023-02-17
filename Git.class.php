@@ -182,10 +182,16 @@ class Git implements IF_UNIT
 	 *
 	 * @created    2023-02-05
 	 * @param      string      $branch_name
+	 * @return     string
 	 */
-	static function Push(string $remote_name, string $branch_name):void
+	static function Push(string $remote_name, string $branch_name):string
 	{
-		echo trim(`git push {$remote_name} {$branch_name} 2>&1`);
+		//	...
+		if( trim(`git rev-parse {$branch_name}`) === trim(`git rev-parse {$remote_name}/{$branch_name}`) ){
+			return '';
+		}
+		//	...
+		return trim(`git push {$remote_name} {$branch_name} 2>&1`);
 	}
 
 	/** Get current branch name.
