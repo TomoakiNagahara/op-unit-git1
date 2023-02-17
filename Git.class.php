@@ -161,8 +161,11 @@ class Git implements IF_UNIT
 	/** Rebase
 	 *
 	 * @created    2023-02-05
+	 * @param      string      $remote_name
+	 * @param      string      $branch_name
+	 * @return     boolean
 	 */
-	static function Rebase($remote_name, $branch_name)
+	static function Rebase(string $remote_name, string $branch_name):bool
 	{
 		//	...
 		if(!self::Switch($branch_name) ){
@@ -180,6 +183,7 @@ class Git implements IF_UNIT
 
 		//	...
 		$result = `git rebase {$remote_name}/{$branch_name} 2>&1`;
+		D($result);
 
 		//	...
 		return $result;
