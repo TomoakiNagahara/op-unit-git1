@@ -71,7 +71,7 @@ class Git implements IF_UNIT
 		$result = `git status 2>&1`;
 
 		//	...
-		return strpos($result, 'nothing to commit, working tree clean') ? true: false;
+		return strpos(' '.$result, 'nothing to commit, working tree clean') ? true: false;
 	}
 
 	/** Fetch repository.
@@ -175,7 +175,9 @@ class Git implements IF_UNIT
 
 		//	...
 		$result = `git rebase {$remote_name}/{$branch_name} 2>&1`;
-		echo $result;
+
+		//	...
+		return $result;
 	}
 
 	/** Push of branch
