@@ -87,6 +87,11 @@ class Git implements IF_UNIT
 
 	/** Get branch name list
 	 *
+	 * <pre>
+	 * Git::Remote()->List();
+	 * </pre>
+	 *
+	 * @deprecated 2023-02-17
 	 * @created    2023-02-05
 	 * @return     array       $branches
 	 */
@@ -183,17 +188,23 @@ class Git implements IF_UNIT
 	/** Push of branch
 	 *
 	 * @created    2023-02-05
+	 * @param      string      $remote_name
 	 * @param      string      $branch_name
+	 * @param      boolean     $force
 	 * @return     string
 	 */
-	static function Push(string $remote_name, string $branch_name):string
+	static function Push(string $remote_name, string $branch_name, bool $force=false):string
 	{
 		//	...
 		if( trim(`git rev-parse {$branch_name}`) === trim(`git rev-parse {$remote_name}/{$branch_name}`) ){
 			return '';
 		}
+
 		//	...
-		return trim(`git push {$remote_name} {$branch_name} 2>&1`);
+		$force = $force ? '-f': '';
+
+		//	...
+		return trim(`git push {$remote_name} {$branch_name} {$force} 2>&1`);
 	}
 
 	/** Get current branch name.
@@ -234,5 +245,25 @@ class Git implements IF_UNIT
 
 		//	...
 		return $_remote;
+	}
+
+	/** Return GitBranch instance.
+	 *
+	 * @created    2023-02-13
+	 * @return    \OP\UNIT\GIT\GitBranch
+	 */
+	static function Branch():\OP\UNIT\GIT\GitBranch
+	{
+		//	...
+		require_once(__DIR__.'/GitBranch.class.php');
+
+		//	...
+		static $_branch;
+		if(!$_branch ){
+			$_branch = new GIT\GitBranch();
+		}
+
+		//	...
+		return $_branch;
 	}
 }
