@@ -79,9 +79,9 @@ class GitRemote implements IF_UNIT
 	/** Return remote repository name list.
 	 *
 	 * @created    2023-02-13
-	 * @return     string
+	 * @return     array
 	 */
-	static function List()
+	static function List():array
 	{
 		return explode("\n", trim(`git remote`));
 	}
