@@ -79,6 +79,22 @@ class Git implements IF_UNIT
 		return $io;
 	}
 
+	/** Stash save
+	 *
+	 * @return bool
+	 */
+	static function Save():bool
+	{
+		//	...
+		$result = `git stash save 2>&1`;
+		//	...
+		if(!$io = strpos(' '.$result, 'No local changes to save') ? true: false ){
+			$io = strpos(' '.$result, 'Saved working directory and index state WIP') ? true: false ;
+		}
+		//	...
+		return $io;
+	}
+
 	/** Fetch repository.
 	 *
 	 * @created    2023-02-13
