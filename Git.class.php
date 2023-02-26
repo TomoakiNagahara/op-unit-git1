@@ -71,7 +71,12 @@ class Git implements IF_UNIT
 		$result = `git status 2>&1`;
 
 		//	...
-		return strpos(' '.$result, 'nothing to commit, working tree clean') ? true: false;
+		if(!$io = strpos(' '.$result, 'nothing to commit, working tree clean') ? true: false ){
+			$io = strpos(' '.$result, 'no changes added to commit') ? true: false ;
+		}
+
+		//	...
+		return $io;
 	}
 
 	/** Fetch repository.
