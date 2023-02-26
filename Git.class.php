@@ -95,6 +95,22 @@ class Git implements IF_UNIT
 		return $io;
 	}
 
+	/** Stash pop
+	 *
+	 * @return bool
+	 */
+	static function Pop():bool
+	{
+		//	...
+		$result = `git stash pop 2>&1`;
+		//	...
+		if(!$io = strpos(' '.$result, 'No stash entries found.') ? true: false ){
+			$io = strpos(' '.$result, 'Dropped refs/stash') ? true: false ;
+		}
+		//	...
+		return $io;
+	}
+
 	/** Fetch repository.
 	 *
 	 * @created    2023-02-13
